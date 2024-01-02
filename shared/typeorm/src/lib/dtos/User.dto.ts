@@ -6,4 +6,4 @@ export type CreateUserDto = Omit<UserDto, 'id' | 'createdAt' | 'updatedAt' | 'po
 
 export type UpdateUserDto = Partial<CreateUserDto>;
 
-export type DeleteUserDto = UserDto['id'];
+export type UserIdDto = UserDto['id'];
