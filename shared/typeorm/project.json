@@ -1,0 +1,24 @@
+{
+  "name": "typeorm",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "shared/typeorm/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/shared/typeorm",
+        "tsConfig": "shared/typeorm/tsconfig.lib.json",
+        "packageJson": "shared/typeorm/package.json",
+        "main": "shared/typeorm/src/index.ts",
+        "assets": ["shared/typeorm/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

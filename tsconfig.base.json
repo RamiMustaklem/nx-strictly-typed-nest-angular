@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nestjs-api-angular-mono/types": ["types/src/index.ts"]
+      "@typeorm": ["shared/typeorm/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
