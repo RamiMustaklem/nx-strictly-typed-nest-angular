@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/User.entity';
-import { Post } from './entities/Post.entity';
+import { Project } from './entities/Project.entity';
 
 @Module({
   controllers: [],
@@ -15,8 +15,8 @@ import { Post } from './entities/Post.entity';
       username: 'root',
       password: '',
       database: 'nestjs-angular-mono',
-      entities: [User, Post],
-      synchronize: true,
+      entities: [User, Project],
+      synchronize: process.env['NODE_ENV'] !== 'production',
     }),
   ],
 })

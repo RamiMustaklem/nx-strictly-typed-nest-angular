@@ -1,8 +1,15 @@
-import { Entity, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import { User } from './User.entity';
 
-@Entity({ name: 'posts' })
-export class Post {
+@Entity({ name: 'projects' })
+export class Project {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,6 +28,6 @@ export class Post {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.projects)
   user: User;
 }
