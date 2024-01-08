@@ -2,11 +2,13 @@ import { User as UserEntity } from "../entities/User.entity";
 
 export type UserDto = InstanceType<typeof UserEntity>;
 
-export type CreateUserDto = Omit<
+export type CreateUserDto = Pick<
   UserDto,
-  'id' | 'createdAt' | 'updatedAt' | 'projects'
+  'name' | 'email' | 'dob' | 'position' | 'department' | 'password'
 >;
 
-export type UpdateUserDto = Partial<CreateUserDto>;
+export type UpdateUserDto = Partial<
+  Omit<CreateUserDto, 'id' | 'createdAt' | 'updatedAt'>
+>;
 
 export type UserIdDto = UserDto['id'];

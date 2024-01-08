@@ -1,12 +1,13 @@
 import {
   Entity,
   Column,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  ManyToMany
 } from 'typeorm';
 import { User } from './User.entity';
+import { PROJECT_STATUS } from '../enums/Project.enum';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -14,13 +15,23 @@ export class Project {
   id: number;
 
   @Column({ unique: true })
-  slug: string;
+  name: string;
 
   @Column()
-  title: string;
+  description: string;
 
   @Column()
-  content: string;
+  startDate?: Date;
+
+  @Column()
+  dueDate?: Date;
+
+  @Column({
+    type: 'enum',
+    enum: PROJECT_STATUS,
+    default: PROJECT_STATUS.TO_DO,
+  })
+  status: PROJECT_STATUS;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -28,6 +39,6 @@ export class Project {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.projects)
-  user: User;
+  @ManyToMany(() => User, (user) => user.projects)
+  team: User[];
 }

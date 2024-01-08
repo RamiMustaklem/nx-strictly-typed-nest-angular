@@ -2,11 +2,13 @@ import { Project as ProjectEntity } from '../entities/Project.entity';
 
 export type ProjectDto = InstanceType<typeof ProjectEntity>;
 
-export type CreateProjectDto = Omit<
+export type CreateProjectDto = Pick<
   ProjectDto,
-  'id' | 'slug' | 'createdAt' | 'updatedAt' | 'user'
+  'name' | 'description' | 'startDate' | 'dueDate' | 'status'
 >;
 
-export type UpdateProjectDto = Partial<CreateProjectDto>;
+export type UpdateProjectDto = Partial<
+  Omit<ProjectDto, 'id' | 'createdAt' | 'updatedAt'>
+>;
 
 export type ProjectIdDto = ProjectDto['id'];
