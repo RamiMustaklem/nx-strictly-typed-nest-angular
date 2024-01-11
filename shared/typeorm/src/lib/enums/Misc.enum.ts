@@ -1,7 +1,8 @@
 export enum SortBy {
   Id = 'id',
   Name = 'name',
-  Position = 'position',
+  CreatedAt = 'createdAt',
+  UpdatedAt = 'updatedAt',
 }
 
 export enum OrderBy {

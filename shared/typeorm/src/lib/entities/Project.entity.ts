@@ -4,10 +4,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  ManyToMany
+  ManyToOne,
 } from 'typeorm';
 import { User } from './User.entity';
-import { PROJECT_STATUS } from '../enums/Project.enum';
+import { PROJECT_STATUS, STATUSES } from '../enums/Project.enum';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -20,18 +20,21 @@ export class Project {
   @Column()
   description: string;
 
-  @Column()
+  @Column({
+    type: 'timestamp'
+  })
   startDate?: Date;
 
-  @Column()
+  @Column({
+    type: 'timestamp'
+  })
   dueDate?: Date;
 
   @Column({
-    type: 'enum',
-    enum: PROJECT_STATUS,
-    default: PROJECT_STATUS.TO_DO,
+    type: 'varchar',
+    default: STATUSES.TO_DO,
   })
-  status: PROJECT_STATUS;
+  status?: PROJECT_STATUS = STATUSES.TO_DO;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -39,6 +42,6 @@ export class Project {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToMany(() => User, (user) => user.projects)
+  @ManyToOne(() => User, (user) => user.projects)
   team: User[];
 }

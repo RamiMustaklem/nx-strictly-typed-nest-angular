@@ -23,18 +23,18 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({
+    type: 'timestamp'
+  })
   dob: Date;
 
   @Column({
-    type: 'enum',
-    enum: POSITION,
+    type: 'varchar',
   })
   position: POSITION;
 
   @Column({
-    type: 'enum',
-    enum: DEPARTMENT,
+    type: 'varchar',
   })
   department: DEPARTMENT;
 

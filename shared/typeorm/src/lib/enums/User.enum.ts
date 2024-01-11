@@ -1,11 +1,17 @@
-export enum POSITION {
-  MANAGER = 'Manager',
-  DEVELOPER = 'Developer',
-  GROUP_MANAGER = 'GroupManager'
-}
+import { ObjectValues } from '../../utils';
 
-export enum DEPARTMENT {
-  ENGINEERING = 'Engineering',
-  MARKETING = 'Marketing',
-  SALES = 'Sales'
-}
+export const POSITIONS = {
+  MANAGER: 'Manager',
+  DEVELOPER: 'Developer',
+  GROUP_MANAGER: 'GroupManager'
+} as const;
+
+export const DEPARTMENTS = {
+  ENGINEERING: 'Engineering',
+  MARKETING: 'Marketing',
+  SALES: 'Sales'
+} as const;
+
+export type POSITION = ObjectValues<typeof POSITIONS>;
+
+export type DEPARTMENT = ObjectValues<typeof DEPARTMENTS>;
