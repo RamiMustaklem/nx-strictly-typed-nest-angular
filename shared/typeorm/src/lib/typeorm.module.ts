@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/User.entity';
 import { Project } from './entities/Project.entity';
+import { IsUniqueConstraint } from './IsUniqueValidator';
 
 @Module({
   controllers: [],
-  providers: [],
+  providers: [IsUniqueConstraint],
   exports: [],
   imports: [
     TypeOrmModule.forRoot({

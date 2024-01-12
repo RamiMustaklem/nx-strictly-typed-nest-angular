@@ -9,7 +9,7 @@ export interface QueryOptions<
   limit?: number;
   // the sortBy field should be a key of the DTO interface
   sortBy?: `${SortBy}` | Exclude<keyof DTO, Excluded>;
-  orderBy?: OrderBy;
+  orderBy?: `${OrderBy}`;
   text?: string;
   // filter object should be a subset of the DTO interface, excluding the K field
   filter?: Partial<Pick<DTO, Exclude<Fields, Excluded>>>;

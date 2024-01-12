@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
-import { OrderBy } from '@typeorm';
 
 @Component({
   selector: 'nestjs-api-angular-mono-users',
@@ -12,16 +11,16 @@ export class UsersComponent implements OnInit {
   constructor(private readonly usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.getUsers(/*{
+    this.usersService.getUsers({
       filter: {
         name: 'Rami',
         position: 'Developer',
         department: 'Engineering',
         dob: new Date(),
       },
-      orderBy: OrderBy.Asc,
+      orderBy: 'asc',
       sortBy: 'department'
-    }*/)
+    })
       .subscribe({
         next(users) {
           /*users.items.forEach((user) => {

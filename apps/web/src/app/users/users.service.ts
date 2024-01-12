@@ -1,64 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
-  CreateUserDto,
-  UpdateUserDto,
-  UserDto,
-  UserIdDto,
+  UserType,
+  UserIdType,
   PaginatedResponse,
-  QueryOptions
+  QueryOptions,
+  CreateUserType,
+  UpdateUserType,
 } from '@typeorm';
+import { BaseService } from '../base.service';
 
-type UsersListQueryOptions = QueryOptions<UserDto, 'password' | 'projects', 'projects'>;
+type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects', 'projects'>;
 
 @Injectable()
-export class UsersService {
+export class UsersService extends BaseService {
 
-  constructor(private readonly http: HttpClient) { }
+  getUsers(queryOptions?: UsersListQueryOptions): Observable<PaginatedResponse<UserType>> {
 
-  private buildQueryOptions(queryOptions: UsersListQueryOptions): HttpParams {
-    const params = new HttpParams({
-      // fromObject: queryOptions
-    });
-    params.set('foo', 'bar');
+    const params = queryOptions
+      ? this.buildQueryOptions<UsersListQueryOptions>(queryOptions)
+      : undefined;
 
-    Object.entries(queryOptions).forEach((q) => {
-      console.log('q', q)
-      // console.log('queryOptions["q"]', queryOptions[q])
-      // params.set(q);
-    });
-
-    return params;
-  }
-
-  getUsers(queryOptions?: UsersListQueryOptions): Observable<PaginatedResponse<UserDto>> {
-
-    // const params = queryOptions ? this.buildQueryOptions(queryOptions) : undefined;
-
-    // const filteredParams = Object.entries(params || {})
-    //   .filter(([, value]) => value !== undefined)
-    //   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-
-    return this.http.get<PaginatedResponse<UserDto>>('/api/users', {
-      // ...(filteredParams && { filteredParams }),
-      // params
+    return this.http.get<PaginatedResponse<UserType>>('/api/users', {
+      params
     });
   }
 
-  getUserById(id: UserIdDto): Observable<UserDto> {
-    return this.http.get<UserDto>(`/api/users/${id}`);
+  getUserById(id: UserIdType): Observable<UserType> {
+    return this.http.get<UserType>(`/api/users/${id}`);
   }
 
-  createUser(user: CreateUserDto): Observable<UserDto> {
-    return this.http.post<UserDto>('/api/users', { ...user });
+  createUser(user: CreateUserType): Observable<UserType> {
+    return this.http.post<UserType>('/api/users', { ...user });
   }
 
-  updateUserById(id: UserIdDto, user: UpdateUserDto): Observable<UserDto> {
-    return this.http.put<UserDto>(`/api/users/${id}`, { ...user });
+  updateUserById(id: UserIdType, user: UpdateUserType): Observable<UserType> {
+    return this.http.put<UserType>(`/api/users/${id}`, { ...user });
   }
 
-  deleteUserById(id: UserIdDto): Observable<boolean> {
+  deleteUserById(id: UserIdType): Observable<boolean> {
     return this.http.delete<boolean>(`/api/users/${id}`);
   }
 
