@@ -6,7 +6,7 @@ export class BaseService {
 
   constructor(protected readonly http: HttpClient) { }
 
-  protected buildQueryOptions<T extends Object>(queryOptions: T): HttpParams {
+  protected buildQueryOptions<T extends object>(queryOptions: T): HttpParams {
     let params = new HttpParams();
 
     Object.entries(queryOptions).forEach(([key, value]) => {
