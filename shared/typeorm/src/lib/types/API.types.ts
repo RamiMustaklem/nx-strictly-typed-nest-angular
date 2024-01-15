@@ -3,7 +3,7 @@ import { OrderBy, SortBy } from '../enums/Misc.enum';
 export interface QueryOptions<
   DTO,
   Excluded extends keyof DTO = never,
-  Fields extends keyof DTO = keyof DTO,
+  Fields extends Exclude<keyof DTO, Excluded> = Exclude<keyof DTO, Excluded>,
 > {
   page?: number;
   limit?: number;
@@ -11,13 +11,8 @@ export interface QueryOptions<
   sortBy?: `${SortBy}` | Exclude<keyof DTO, Excluded>;
   orderBy?: `${OrderBy}`;
   text?: string;
-  // filter object should be a subset of the DTO interface, excluding the K field
-  filter?: Partial<Pick<DTO, Exclude<Fields, Excluded>>>;
-}
-
-export interface ItemResponse<T, K = never> {
-  item: T;
-  related: K;
+  // filter object should be a subset of the DTO interface, excluding the Excluded fields
+  filter?: Partial<Pick<DTO, Fields>>;
 }
 
 export interface PaginatedResponse<T> {

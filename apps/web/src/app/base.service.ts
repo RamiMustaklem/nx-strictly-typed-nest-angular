@@ -12,6 +12,8 @@ export class BaseService {
     Object.entries(queryOptions).forEach(([key, value]) => {
       if (typeof value === 'object') {
         params = params.set(key, JSON.stringify(value));
+      } else if (value instanceof Date) {
+        params = params.set(key, value.toISOString());
       } else {
         params = params.set(key, value);
       }

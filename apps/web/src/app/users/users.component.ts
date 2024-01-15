@@ -12,21 +12,24 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.usersService.getUsers({
+      page: 1,
+      limit: 10,
       filter: {
-        name: 'Rami',
+        // name: 'Rami',
         position: 'Developer',
-        department: 'Engineering',
-        dob: new Date(),
+        // department: 'Engineering',
+        dob: (new Date("1988-01-06")).toISOString().substring(0, 10),
       },
-      orderBy: 'asc',
-      sortBy: 'department'
+      orderBy: 'desc',
+      sortBy: 'id',
+      // text: 'John'
     })
       .subscribe({
         next(users) {
-          /*users.items.forEach((user) => {
+          users.items.forEach((user) => {
             console.log('user', user.id, user.name, user.email)
-          });*/
-          console.log('users', users);
+          });
+          console.log('users.meta', users.meta);
         }, error(error) {
           console.log('error', error);
         }

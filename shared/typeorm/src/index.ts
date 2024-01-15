@@ -10,6 +10,7 @@ export * from './utils';
 
 export * from './lib/dtos/User.dto';
 export * from './lib/dtos/Project.dto';
+export * from './lib/dtos/Query.dto';
 
 export * from './lib/entities/User.entity';
 export * from './lib/entities/Project.entity';

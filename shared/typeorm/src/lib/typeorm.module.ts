@@ -3,11 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/User.entity';
 import { Project } from './entities/Project.entity';
 import { IsUniqueConstraint } from './IsUniqueValidator';
+import { ParseJsonPipe } from './transformers/parse-json.pipe';
 
 @Module({
   controllers: [],
-  providers: [IsUniqueConstraint],
-  exports: [],
+  providers: [IsUniqueConstraint, ParseJsonPipe],
+  exports: [ParseJsonPipe],
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',

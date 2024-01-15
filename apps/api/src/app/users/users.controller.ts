@@ -1,6 +1,22 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Delete,
+  Get,
+  Param,
+  ParseArrayPipe,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+  UsePipes,
+  ValidationPipe
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto, UserIdType } from '@typeorm';
+import { CreateUserDto, QueryOptions, UpdateUserDto, UserIdType, UserType, QueryDto } from '@typeorm';
+
+type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects'>;
 
 @Controller('users')
 export class UsersController {
@@ -8,8 +24,21 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  getUsers() {
-    return this.usersService.findUsers();
+  // @UsePipes(new ValidationPipe())
+  getUsers(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    // @Query() { text, sortBy, orderBy }: Omit<UsersListQueryOptions, 'page' | 'limit' | 'filter'>,
+    @Query() query: QueryDto,
+    // @Query('filter', new ParseJsonPipe<UsersListQueryOptions['filter']>()) filter: UsersListQueryOptions['filter']
+  ) {
+    const { orderBy, sortBy, text, filter } = <UsersListQueryOptions>query;
+    return this.usersService.paginate({ page, limit }, {
+      text,
+      sortBy,
+      orderBy,
+      filter
+    });
   }
 
   @Get(':id')

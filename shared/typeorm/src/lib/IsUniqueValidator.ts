@@ -15,7 +15,7 @@ export type IsUniqueInterface = {
 
 // decorator function
 export function IsUnique(options: IsUniqueInterface, validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       name: 'IsUnique',
       target: object.constructor,

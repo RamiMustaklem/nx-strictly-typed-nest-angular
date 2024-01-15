@@ -31,10 +31,11 @@ export class User {
   password: string;
 
   @Column({
-    type: 'timestamp'
+    type: 'varchar',
+    length: 10,
   })
   @IsDateString()
-  dob: Date;
+  dob: string;
 
   @Column({
     type: 'varchar',

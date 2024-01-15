@@ -10,7 +10,7 @@ import {
 } from '@typeorm';
 import { BaseService } from '../base.service';
 
-type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects', 'projects'>;
+type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects', 'dob' | 'position'>;
 
 @Injectable()
 export class UsersService extends BaseService {
@@ -22,7 +22,7 @@ export class UsersService extends BaseService {
       : undefined;
 
     return this.http.get<PaginatedResponse<UserType>>('/api/users', {
-      params
+      params,
     });
   }
 

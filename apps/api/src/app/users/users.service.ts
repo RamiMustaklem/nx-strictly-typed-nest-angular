@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateUserDto, Project, UpdateUserDto, User, UserIdType } from '@typeorm';
+import { Like, Repository } from 'typeorm';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { CreateUserDto, Project, QueryOptions, UpdateUserDto, User, UserIdType, UserType } from '@typeorm';
+
+type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects'>;
 
 @Injectable()
 export class UsersService {
@@ -10,6 +13,20 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Project) private readonly projectRepository: Repository<Project>,
   ) {}
+
+  // create a base service that will be extended by all these services that include paginate func
+
+  async paginate(
+    options: IPaginationOptions,
+    filterOptions: Omit<UsersListQueryOptions, 'page' | 'limit'>
+  ): Promise<Pagination<User>> {
+    const { text, filter, sortBy, orderBy } = filterOptions;
+    return paginate<User>(this.userRepository, options, {
+      ...(sortBy && orderBy && { order: { [sortBy]: orderBy } }),
+      ...(text && { where: { name: Like(`%${text}%`) } }),
+      ...(filter && { where: { ...filter } })
+    });
+  }
 
   findUsers() {
     return this.userRepository.find({ relations: ['projects'] });
@@ -20,12 +37,12 @@ export class UsersService {
   }
 
   createUser(user: CreateUserDto) {
-    const newUser = this.userRepository.create({ ...user, createdAt: new Date() });
+    const newUser = this.userRepository.create({ ...user, /*createdAt: new Date()*/ });
     return this.userRepository.save(newUser);
   }
 
   updateUser(id: UserIdType, user: UpdateUserDto) {
-    return this.userRepository.update({ id }, { ...user, updatedAt: new Date() });
+    return this.userRepository.update({ id }, { ...user, /*updatedAt: new Date()*/ });
   }
 
   deleteUser(id: UserIdType) {
