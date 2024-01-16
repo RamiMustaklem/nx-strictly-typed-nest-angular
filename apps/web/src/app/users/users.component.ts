@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
         dob: (new Date("1988-01-06")).toISOString().substring(0, 10),
       },
       orderBy: 'desc',
-      sortBy: 'id',
+      sortBy: 'dob',
       // text: 'John'
     })
       .subscribe({

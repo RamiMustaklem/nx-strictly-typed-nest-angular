@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import {
   CreateProjectDto,
   Project,
   UpdateProjectDto,
   User,
-  ProjectIdDto
+  ProjectIdType,
+  QueryOptions,
+  ProjectType
 } from '@typeorm';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+
+type ProjectsListQueryOptions = QueryOptions<ProjectType, 'team'>;
 
 @Injectable()
 export class ProjectsService {
@@ -17,11 +22,23 @@ export class ProjectsService {
     @InjectRepository(Project) private readonly projectRepository: Repository<Project>,
   ) {}
 
+  async paginate(
+    options: IPaginationOptions,
+    filterOptions: Omit<ProjectsListQueryOptions, 'page' | 'limit'>
+  ): Promise<Pagination<Project>> {
+    const { text, filter, sortBy, orderBy } = filterOptions;
+    return paginate<Project>(this.projectRepository, options, {
+      ...(sortBy && orderBy && { order: { [sortBy]: orderBy } }),
+      ...(text && { where: { name: Like(`%${text}%`) } }),
+      ...(filter && { where: { ...filter } })
+    });
+  }
+
   findProjects() {
     return this.projectRepository.find({ relations: ['projects'] });
   }
 
-  findProjectById(id: ProjectIdDto) {
+  findProjectById(id: ProjectIdType) {
     return this.projectRepository.findOne({ where: { id }, relations: ['projects'] });
   }
 
@@ -33,11 +50,11 @@ export class ProjectsService {
     return this.projectRepository.save(newProject);
   }
 
-  updateProject(id: ProjectIdDto, user: UpdateProjectDto) {
+  updateProject(id: ProjectIdType, user: UpdateProjectDto) {
     return this.projectRepository.update({ id }, { ...user });
   }
 
-  deleteProject(id: ProjectIdDto) {
+  deleteProject(id: ProjectIdType) {
     return this.projectRepository.delete({ id });
   }
 

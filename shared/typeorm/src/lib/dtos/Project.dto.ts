@@ -1,14 +1,27 @@
-import { Project as ProjectEntity } from '../entities/Project.entity';
+import { Project } from '../entities/Project.entity';
+import { PartialType, PickType } from '@nestjs/mapped-types';
 
-export type ProjectDto = InstanceType<typeof ProjectEntity>;
+export type ProjectType = InstanceType<typeof Project>;
 
-export type CreateProjectDto = Pick<
-  ProjectDto,
+/*export type CreateProjectDto = Pick<
+  ProjectType,
   'name' | 'description' | 'startDate' | 'dueDate' | 'status'
->;
+>;*/
 
-export type UpdateProjectDto = Partial<
-  Omit<ProjectDto, 'id' | 'createdAt' | 'updatedAt'>
->;
+// const projectOmittedFields: Readonly<Array<keyof ProjectType>> = ['id', 'createdAt', 'updatedAt'] as const;
+// export class ProjectDto extends OmitType(ProjectEntity, createProjectOmittedFields) {}
 
-export type ProjectIdDto = ProjectDto['id'];
+const createProjectFields: Readonly<Array<keyof ProjectType>> = [
+  'name',
+  'description',
+  'startDate',
+  'dueDate',
+  'status',
+] as const;
+export class CreateProjectDto extends PickType(Project, createProjectFields) {}
+
+/*export type UpdateProjectDto = Partial<
+  Omit<ProjectType, 'id' | 'createdAt' | 'updatedAt'>
+>;*/
+
+export class UpdateProjectDto extends PartialType(CreateProjectDto) {}

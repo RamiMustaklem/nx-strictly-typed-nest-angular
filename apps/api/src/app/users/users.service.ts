@@ -14,8 +14,6 @@ export class UsersService {
     @InjectRepository(Project) private readonly projectRepository: Repository<Project>,
   ) {}
 
-  // create a base service that will be extended by all these services that include paginate func
-
   async paginate(
     options: IPaginationOptions,
     filterOptions: Omit<UsersListQueryOptions, 'page' | 'limit'>

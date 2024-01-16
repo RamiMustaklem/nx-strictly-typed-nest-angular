@@ -3,7 +3,8 @@ import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
 import { OrderBy, SortBy } from '../enums/Misc.enum';
 import { QueryOptions } from '../types/API.types';
 
-export class QueryDto implements QueryOptions<unknown, never, never> {
+export class QueryDto<T, K extends keyof T = never, U extends Exclude<keyof T, K> = Exclude<keyof T, K>>
+  implements QueryOptions<T, K, U> {
 
   @IsNumber()
   @IsOptional()
@@ -17,7 +18,7 @@ export class QueryDto implements QueryOptions<unknown, never, never> {
 
   @IsString()
   @IsOptional()
-  sortBy?: `${SortBy}`;
+  sortBy?: `${SortBy}` | Exclude<keyof T, K>; // QueryOptions<T, K, U>['sortBy'];
 
   @Transform(({ value }: { value: string }) => value.toLowerCase())
   @IsString()
@@ -32,5 +33,5 @@ export class QueryDto implements QueryOptions<unknown, never, never> {
 
   @Transform(({ value }) => JSON.parse(value))
   @IsOptional()
-  filter?: QueryOptions<unknown>;
+  filter?: QueryOptions<T, K, U>['filter']; // Partial<Pick<T, U>>;
 }
