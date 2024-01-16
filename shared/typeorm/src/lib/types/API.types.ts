@@ -25,3 +25,8 @@ export interface PaginatedResponse<T> {
     currentPage: number;
   };
 }
+
+export interface ErrorResponse {
+  statusCode: number;
+  message: string;
+}

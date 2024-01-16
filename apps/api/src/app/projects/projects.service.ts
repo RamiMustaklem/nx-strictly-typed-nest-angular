@@ -35,11 +35,11 @@ export class ProjectsService {
   }
 
   findProjects() {
-    return this.projectRepository.find({ relations: ['projects'] });
+    return this.projectRepository.find({ relations: ['team'] });
   }
 
-  findProjectById(id: ProjectIdType) {
-    return this.projectRepository.findOne({ where: { id }, relations: ['projects'] });
+  async findProjectById(id: ProjectIdType) {
+    return await this.projectRepository.findOne({ where: { id }, relations: ['team'] });
   }
 
   createProject(user: CreateProjectDto) {

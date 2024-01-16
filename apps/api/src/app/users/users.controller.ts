@@ -4,6 +4,9 @@ import {
   DefaultValuePipe,
   Delete,
   Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -36,8 +39,15 @@ export class UsersController {
   }
 
   @Get(':id')
-  getUserById(@Param('id', ParseIntPipe) id: UserIdType) {
-    return this.usersService.findUserById(id);
+  @HttpCode(HttpStatus.OK)
+  async getUserById(@Param('id', ParseIntPipe) id: UserIdType) {
+    const user = await this.usersService.findUserById(id);
+
+    if (!user) {
+      throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
   }
 
   @Post()

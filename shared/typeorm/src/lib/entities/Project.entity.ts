@@ -6,8 +6,10 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
 } from 'typeorm';
+import { IsDateString, IsIn, IsNotEmpty } from 'class-validator';
 import { User } from './User.entity';
 import { PROJECT_STATUS, STATUSES } from '../enums/Project.enum';
+import { IsUnique } from '../IsUniqueValidator';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -15,25 +17,34 @@ export class Project {
   id: number;
 
   @Column({ unique: true })
+  @IsNotEmpty()
+  @IsUnique({ tableName: 'projects', column: 'name' })
   name: string;
 
   @Column()
+  @IsNotEmpty()
   description: string;
 
   @Column({
-    type: 'timestamp'
+    type: 'varchar',
+    length: 10,
   })
-  startDate?: Date;
+  @IsDateString()
+  startDate?: string;
 
   @Column({
-    type: 'timestamp'
+    type: 'varchar',
+    length: 10,
   })
-  dueDate?: Date;
+  @IsDateString()
+  dueDate?: string;
 
   @Column({
     type: 'varchar',
     default: STATUSES.TO_DO,
   })
+  @IsNotEmpty()
+  @IsIn(Object.values(STATUSES))
   status?: PROJECT_STATUS = STATUSES.TO_DO;
 
   @CreateDateColumn()

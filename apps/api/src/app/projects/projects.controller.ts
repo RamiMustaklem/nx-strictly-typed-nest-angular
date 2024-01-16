@@ -1,4 +1,18 @@
-import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Delete,
+  Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import {
   CreateProjectDto,
@@ -33,8 +47,15 @@ export class ProjectsController {
   }
 
   @Get(':id')
-  getProjectById(@Param('id', ParseIntPipe) id: ProjectIdType) {
-    return this.projectsService.findProjectById(id);
+  @HttpCode(HttpStatus.OK)
+  async getProjectById(@Param('id', ParseIntPipe) id: ProjectIdType) {
+    const project = await this.projectsService.findProjectById(id);
+
+    if (!project) {
+      throw new HttpException('NotFound', HttpStatus.NOT_FOUND);
+    }
+
+    return project;
   }
 
   @Post()
