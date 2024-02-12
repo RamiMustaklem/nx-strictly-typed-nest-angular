@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from './users.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'nestjs-api-angular-mono-users',
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  templateUrl: './users-list.component.html',
+  styleUrl: './users-list.component.scss'
 })
-export class UsersComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 
   constructor(private readonly usersService: UsersService) { }
 

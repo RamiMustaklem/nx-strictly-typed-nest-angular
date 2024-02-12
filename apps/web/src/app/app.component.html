@@ -1,1 +1,14 @@
+<nav>
+  <ul>
+    @for (link of navLinks; track link.url) {
+      <li>
+        <a [routerLink]="link.url" [routerLinkActive]="activeNavClass"
+           [routerLinkActiveOptions]="{exact: true}">{{ link.label }}</a>
+      </li>
+    } @empty {
+      No nav items available
+    }
+  </ul>
+</nav>
+
 <router-outlet></router-outlet>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { BgColorCombination, TextColorCombination } from '@typeorm';
 
 @Component({
   standalone: true,
@@ -9,5 +10,26 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'web';
+  title = 'User Management App';
+
+  activeNavClass: [TextColorCombination, BgColorCombination] = ['text-red-500', 'bg-orange-200'];
+
+  navLinks: { label: string, url: string }[] = [
+    {
+      label: 'Home',
+      url: '/',
+    },
+    {
+      label: 'Users',
+      url: '/users',
+    },
+    {
+      label: 'Projects',
+      url: '/projects',
+    },
+  ];
+
+  constructor(private readonly router: Router) {
+    // console.log(this.router.navigate(['/users']));
+  }
 }
