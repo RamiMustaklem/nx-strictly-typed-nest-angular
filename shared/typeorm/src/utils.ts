@@ -2,9 +2,19 @@ import { PROJECT_STATUS } from './lib/enums/Project.enum';
 
 export type ObjectValues<T> = T[keyof T];
 
+const COLORS = [
+  'red',
+  'blue',
+  'green',
+  'yellow',
+  'purple',
+  'orange',
+  'slate',
+] as const;
+
 type textColor = 'text';
 type bgColor = 'bg';
-type colorName = 'orange' | 'green' | 'red' | 'blue' | 'grey';
+type colorName = typeof COLORS[number];
 type colorWeight = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 type colorType = 'success' | 'danger' | 'warning' | 'info';
 
@@ -15,8 +25,8 @@ export type ElementColorCombination = `${textColor | bgColor}-${colorName}-${col
 export type Email = `${string}@${string}.${string}`;
 
 export const colorMap: { [key in colorType]: colorName } = {
-  success: 'blue',
-  info: 'grey',
+  success: 'green',
+  info: 'blue',
   warning: 'orange',
   danger: 'red',
 };
@@ -26,7 +36,7 @@ export const statusColorMap: {
 } = {
   'To Do': ['text-blue-300', 'bg-orange-100'],
   'In Progress': ['text-blue-300', 'bg-orange-100'],
-  'Done': ['text-blue-700', 'bg-grey-100'],
+  'Done': ['text-blue-700', 'bg-green-100'],
   'Incomplete': ['text-blue-300', 'bg-orange-100'],
-  'Archived': ['text-grey-900'],
+  'Archived': ['text-slate-900'],
 };

@@ -1,8 +1,12 @@
+<h1 class="text-orange-300">User Management App</h1>
+
 <nav>
   <ul>
     @for (link of navLinks; track link.url) {
       <li>
-        <a [routerLink]="link.url" [routerLinkActive]="activeNavClass"
+        <a [routerLink]="link.url"
+           [routerLinkActive]="activeNavClass"
+           (isActiveChange)="onNavChange($event, link.url)"
            [routerLinkActiveOptions]="{exact: true}">{{ link.label }}</a>
       </li>
     } @empty {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { BgColorCombination, TextColorCombination } from '@typeorm';
+import { RouterModule } from '@angular/router';
+import { TextColorCombination } from '@typeorm';
 
 @Component({
   standalone: true,
@@ -12,7 +12,8 @@ import { BgColorCombination, TextColorCombination } from '@typeorm';
 export class AppComponent {
   title = 'User Management App';
 
-  activeNavClass: [TextColorCombination, BgColorCombination] = ['text-red-500', 'bg-orange-200'];
+  activeNavClass: TextColorCombination = 'text-red-500';
+  inactiveNavClass: TextColorCombination = 'text-slate-800';
 
   navLinks: { label: string, url: string }[] = [
     {
@@ -29,7 +30,14 @@ export class AppComponent {
     },
   ];
 
-  constructor(private readonly router: Router) {
-    // console.log(this.router.navigate(['/users']));
+  constructor() { }
+
+  onNavChange(event: boolean, url: string) {
+    this.navLinks = this.navLinks.map((link) => {
+      if (link.url === url) {
+        return { ...link, textColor: this.activeNavClass };
+      }
+      return { ...link, textColor: this.inactiveNavClass };
+    });
   }
 }
