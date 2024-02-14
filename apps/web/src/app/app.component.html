@@ -7,7 +7,7 @@
         <a [routerLink]="link.url"
            [routerLinkActive]="activeNavClass"
            (isActiveChange)="onNavChange($event, link.url)"
-           [routerLinkActiveOptions]="{exact: true}">{{ link.label }}</a>
+           [routerLinkActiveOptions]="{exact: link.url === '/'}">{{ link.label }}</a>
       </li>
     } @empty {
       No nav items available

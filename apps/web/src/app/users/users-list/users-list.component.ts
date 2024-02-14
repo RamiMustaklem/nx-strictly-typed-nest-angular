@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
+import { UserType } from '@typeorm';
 
 @Component({
   selector: 'nestjs-api-angular-mono-users',
@@ -7,6 +8,8 @@ import { UsersService } from '../users.service';
   styleUrl: './users-list.component.scss'
 })
 export class UsersListComponent implements OnInit {
+
+  users: UserType[] = [];
 
   constructor(private readonly usersService: UsersService) { }
 
@@ -25,7 +28,8 @@ export class UsersListComponent implements OnInit {
       // text: 'John'
     })
       .subscribe({
-        next(users) {
+        next: (users) => {
+          this.users = users.items;
           users.items.forEach((user) => {
             console.log('user', user.id, user.name, user.email)
           });
@@ -35,10 +39,10 @@ export class UsersListComponent implements OnInit {
         }
       });
 
-    this.usersService.getUserById(1)
+    /*this.usersService.getUserById(1)
       .subscribe((user) => {
         console.log('user', user)
-      })
+      })*/
   }
 
 }

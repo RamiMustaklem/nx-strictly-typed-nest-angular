@@ -1,0 +1,29 @@
+<h2 class="text-blue-500">Projects</h2>
+
+<a routerLink="/projects/create">Create Project</a>
+
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>Due Date</th>
+    <th>Status</th>
+    <th>Created At</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (project of projects; track project.id) {
+      <tr>
+        <td>{{ project.id }}</td>
+        <td><a routerLink="/projects/{{project.id}}">{{ project.name }}</a></td>
+        <td>{{ project.startDate | date }}</td>
+        <td>{{ project.dueDate | date }}</td>
+        <!-- status should be transformed into a badge with color -->
+        <td class="status" [ngClass]="projectStatusMap[project.status!]">{{ project.status }}</td>
+        <td>{{ project.createdAt | date }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

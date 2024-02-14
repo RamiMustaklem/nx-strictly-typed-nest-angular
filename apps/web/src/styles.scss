@@ -96,3 +96,9 @@ $colors: (
 
 // Call mixin
 @include color-classes($colors);
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 4px 8px;
+}

@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProjectsComponent } from './projects.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectsComponent
-  }
+    component: ProjectsListComponent,
+  },
+  {
+    path: 'create',
+    component: ProjectFormComponent,
+  },
+  {
+    path: ':id',
+    component: ProjectFormComponent,
+  },
 ];
 
 @NgModule({
