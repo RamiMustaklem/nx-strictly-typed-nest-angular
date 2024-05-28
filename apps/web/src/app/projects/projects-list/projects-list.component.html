@@ -1,6 +1,11 @@
-<h2 class="text-blue-500">Projects</h2>
-
 <a routerLink="/projects/create">Create Project</a>
+
+<hr>
+
+<!-- reset filters button -->
+<a *ngIf="status" routerLink="./" [queryParams]="{}">
+  Reset Filters
+</a>
 
 <table>
   <thead>
@@ -21,7 +26,11 @@
         <td>{{ project.startDate | date }}</td>
         <td>{{ project.dueDate | date }}</td>
         <!-- status should be transformed into a badge with color -->
-        <td class="status" [ngClass]="projectStatusMap[project.status!]">{{ project.status }}</td>
+        <td class="status" [ngClass]="projectStatusMap[project.status!]">
+          <a routerLink="./" [queryParams]="{status: project.status}">
+            {{ project.status }}
+          </a>
+        </td>
         <td>{{ project.createdAt | date }}</td>
       </tr>
     }
