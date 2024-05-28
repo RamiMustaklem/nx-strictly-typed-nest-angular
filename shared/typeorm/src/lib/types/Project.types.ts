@@ -1,9 +1,15 @@
-import { CreateProjectDto, ProjectType, UpdateProjectDto } from '../dtos/Project.dto';
 import { STATUSES } from '../enums/Project.enum';
+import { Project } from '../entities/Project.entity';
 
-export type CreateProjectType = InstanceType<typeof CreateProjectDto>;
-
-export type UpdateProjectType = InstanceType<typeof UpdateProjectDto>;
+export type ProjectType = Required<InstanceType<typeof Project>>;
+export type CreateProjectType = Pick<
+  ProjectType,
+  'name' | 'description' | 'startDate' | 'dueDate' | 'status'
+>;
+export type UpdateProjectType = Partial<CreateProjectType>;
+/*export type UpdateProjectType = Partial<
+  Omit<ProjectType, 'id' | 'createdAt' | 'updatedAt'>
+>;*/
 
 export type ProjectIdType = ProjectType['id'];
 

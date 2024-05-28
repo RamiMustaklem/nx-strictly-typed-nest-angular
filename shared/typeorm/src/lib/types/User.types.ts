@@ -1,20 +1,19 @@
 import { DEPARTMENTS, POSITIONS } from '../enums/User.enum';
-import { CreateUserDto, UpdateUserDto, UserType } from '../dtos/User.dto';
+import { User } from '../entities/User.entity';
 
-export type CreateUserType = InstanceType<typeof CreateUserDto>;
-/*export type CreateUserType = Pick<
+export type UserType = Required<InstanceType<typeof User>>;
+export type CreateUserType = Pick<
   UserType,
   'name' | 'email' | 'dob' | 'position' | 'department' | 'password'
->;*/
-
-export type UpdateUserType = InstanceType<typeof UpdateUserDto>;
+>;
+export type UpdateUserType = Partial<CreateUserType>;
 /*export type UpdateUserType = Partial<
   Omit<CreateUserType, 'id' | 'createdAt' | 'updatedAt'>
 >;*/
 
 export type UserIdType = UserType['id'];
 
-type Employee = Omit<UserType, 'position' | 'department' | 'createdAt' | 'updatedAt'>;
+type Employee = Omit<UserType, 'position' | 'department'>;
 
 type ENG = typeof DEPARTMENTS.ENGINEERING;
 type DEV = typeof POSITIONS.DEVELOPER;
