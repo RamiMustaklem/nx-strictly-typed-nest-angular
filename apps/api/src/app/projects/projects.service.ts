@@ -42,16 +42,17 @@ export class ProjectsService {
     return await this.projectRepository.findOne({ where: { id }, relations: ['team'] });
   }
 
-  createProject(user: CreateProjectDto) {
+  createProject(project: CreateProjectDto) {
     const newProject = this.projectRepository.create({
-      ...user,
+      ...project,
       createdAt: new Date(),
     });
     return this.projectRepository.save(newProject);
   }
 
-  updateProject(id: ProjectIdType, user: UpdateProjectDto) {
-    return this.projectRepository.update({ id }, { ...user });
+  async updateProject(id: ProjectIdType, project: UpdateProjectDto) {
+    await this.projectRepository.update({ id }, { ...project });
+    return await this.projectRepository.findOne({ where: { id } });
   }
 
   deleteProject(id: ProjectIdType) {

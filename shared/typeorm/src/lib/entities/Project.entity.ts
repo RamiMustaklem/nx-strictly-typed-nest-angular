@@ -45,7 +45,7 @@ export class Project {
   })
   @IsNotEmpty()
   @IsIn(Object.values(STATUSES))
-  status?: PROJECT_STATUS = STATUSES.TO_DO;
+  status?: PROJECT_STATUS;
 
   @CreateDateColumn()
   createdAt: Date;
