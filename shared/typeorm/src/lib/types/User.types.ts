@@ -1,4 +1,4 @@
-import { DEPARTMENTS, POSITIONS } from '../enums/User.enum';
+import { DEPARTMENTS, POSITIONS } from '@utils';
 import { User } from '../entities/User.entity';
 
 export type UserType = Required<InstanceType<typeof User>>;

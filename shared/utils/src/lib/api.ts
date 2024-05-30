@@ -1,4 +1,4 @@
-import { OrderBy, SortBy } from '../enums/Misc.enum';
+import { OrderBy, SortBy } from './types';
 
 export interface QueryOptions<
   DTO,

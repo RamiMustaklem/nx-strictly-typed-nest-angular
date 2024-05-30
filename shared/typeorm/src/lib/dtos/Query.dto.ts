@@ -1,7 +1,6 @@
 import { Transform, Type } from 'class-transformer';
 import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
-import { OrderBy, SortBy } from '../enums/Misc.enum';
-import { QueryOptions } from '../types/API.types';
+import { OrderBy, SortBy, ORDER_BY, QueryOptions } from '@utils';
 
 export class QueryDto<T, K extends keyof T = never, U extends Exclude<keyof T, K> = Exclude<keyof T, K>>
   implements QueryOptions<T, K, U> {
@@ -23,7 +22,7 @@ export class QueryDto<T, K extends keyof T = never, U extends Exclude<keyof T, K
   @Transform(({ value }: { value: string }) => value.toLowerCase())
   @IsString()
   @IsOptional()
-  @IsIn(Object.values(OrderBy))
+  @IsIn(Object.values(ORDER_BY))
   orderBy?: `${OrderBy}`;
 
   @Transform(({ value }: { value: string }) => value.toLowerCase())

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TextColorCombination } from '@typeorm';
+import { TextColorCombination } from '@utils';
 
 @Component({
   standalone: true,

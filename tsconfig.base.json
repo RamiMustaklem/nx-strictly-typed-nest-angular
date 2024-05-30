@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@typeorm": ["shared/typeorm/src/index.ts"]
+      "@typeorm": ["shared/typeorm/src/index.ts"],
+      "@utils": ["shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

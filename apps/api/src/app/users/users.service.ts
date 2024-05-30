@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { CreateUserDto, Project, QueryOptions, UpdateUserDto, User, UserIdType, UserType } from '@typeorm';
+import { CreateUserDto, Project, UpdateUserDto, User, UserIdType, UserType } from '@typeorm';
+import { QueryOptions } from '@utils';
 
 type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects'>;
 

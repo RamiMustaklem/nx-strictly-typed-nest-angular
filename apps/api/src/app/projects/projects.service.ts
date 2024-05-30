@@ -7,10 +7,10 @@ import {
   UpdateProjectDto,
   User,
   ProjectIdType,
-  QueryOptions,
   ProjectType
 } from '@typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { QueryOptions } from '@utils';
 
 type ProjectsListQueryOptions = QueryOptions<ProjectType, 'team'>;
 

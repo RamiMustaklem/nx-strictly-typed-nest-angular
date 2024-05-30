@@ -1,4 +1,4 @@
-import { STATUSES } from '../enums/Project.enum';
+import { STATUSES } from '@utils';
 import { Project } from '../entities/Project.entity';
 
 export type ProjectType = Required<InstanceType<typeof Project>>;

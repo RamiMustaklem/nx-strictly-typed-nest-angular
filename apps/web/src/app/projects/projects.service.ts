@@ -3,11 +3,10 @@ import { catchError, Observable } from 'rxjs';
 import {
   ProjectType,
   ProjectIdType,
-  PaginatedResponse,
-  QueryOptions,
   CreateProjectType,
   UpdateProjectType,
 } from '@typeorm';
+import { PaginatedResponse, QueryOptions } from '@utils';
 import { BaseService } from '../base.service';
 
 type ProjectsListQueryOptions = QueryOptions<ProjectType, 'team'>;

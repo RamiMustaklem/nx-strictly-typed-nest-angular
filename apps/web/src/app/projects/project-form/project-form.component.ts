@@ -1,26 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { updatedDiff } from 'deep-object-diff';
 import {
   CreateProjectType,
-  CustomTypedForm,
-  ErrorResponse,
   ProjectIdType,
   ProjectType,
 } from '@typeorm';
+import { CustomTypedForm, ErrorResponse, STATUSES } from '@utils';
 import { ProjectsService } from '../projects.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { updatedDiff } from 'deep-object-diff';
 
 type ProjectForm = CustomTypedForm<CreateProjectType>;
-
-const STATUSES = {
-  TO_DO: 'To Do',
-  IN_PROGRESS: 'In Progress',
-  DONE: 'Done',
-  INCOMPLETE: 'Incomplete',
-  ARCHIVED: 'Archived'
-} as const;
 
 @Component({
   selector: 'nestjs-api-angular-mono-project-form',
@@ -62,7 +53,6 @@ export class ProjectFormComponent implements OnInit {
               ...this.project
             });
             this.projectForm.enable();
-            console.log(this.projectForm.value.status)
           },
           error: (error: ErrorResponse) => {
             console.log('error', error);

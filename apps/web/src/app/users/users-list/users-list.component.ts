@@ -30,10 +30,10 @@ export class UsersListComponent implements OnInit {
       .subscribe({
         next: (users) => {
           this.users = users.items;
-          users.items.forEach((user) => {
-            console.log('user', user.id, user.name, user.email)
-          });
-          console.log('users.meta', users.meta);
+          // users.items.forEach((user) => {
+          //   console.log('user', user.id, user.name, user.email)
+          // });
+          // console.log('users.meta', users.meta);
         }, error(error) {
           console.log('error', error);
         }

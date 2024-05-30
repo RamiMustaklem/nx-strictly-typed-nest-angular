@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { ErrorResponse } from '@typeorm';
+import { ErrorResponse } from '@utils';
 
 interface IError extends HttpErrorResponse {
   error: ErrorResponse

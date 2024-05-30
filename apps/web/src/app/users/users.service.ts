@@ -3,11 +3,10 @@ import { Observable } from 'rxjs';
 import {
   UserType,
   UserIdType,
-  PaginatedResponse,
-  QueryOptions,
   CreateUserType,
   UpdateUserType,
 } from '@typeorm';
+import { PaginatedResponse, QueryOptions } from '@utils';
 import { BaseService } from '../base.service';
 
 type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects', 'dob' | 'position'>;

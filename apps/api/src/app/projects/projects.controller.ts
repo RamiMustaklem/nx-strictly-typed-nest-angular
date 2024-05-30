@@ -20,9 +20,9 @@ import {
   ProjectIdType,
   QueryDto,
   Project,
-  QueryOptions,
   ProjectType
 } from '@typeorm';
+import { QueryOptions } from '@utils';
 
 type ProjectsListQueryOptions = QueryOptions<ProjectType, 'team'>;
 

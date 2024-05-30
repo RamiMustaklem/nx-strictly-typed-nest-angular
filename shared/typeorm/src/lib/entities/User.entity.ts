@@ -8,9 +8,8 @@ import {
 } from 'typeorm';
 import { IsDateString, IsEmail, IsIn, IsNotEmpty } from 'class-validator';
 import { Project } from './Project.entity';
-import { DEPARTMENT, DEPARTMENTS, POSITION, POSITIONS } from '../enums/User.enum';
+import { DEPARTMENT, DEPARTMENTS, Email, POSITION, POSITIONS } from '@utils';
 import { IsUnique } from '../IsUniqueValidator';
-import { Email } from '../../utils';
 
 @Entity({ name: 'users' })
 export class User {

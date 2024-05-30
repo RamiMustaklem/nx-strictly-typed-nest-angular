@@ -14,7 +14,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, QueryOptions, UpdateUserDto, UserIdType, UserType, QueryDto, User } from '@typeorm';
+import { CreateUserDto, UpdateUserDto, UserIdType, UserType, QueryDto, User } from '@typeorm';
+import { QueryOptions } from '@utils';
 
 type UsersListQueryOptions = QueryOptions<UserType, 'password' | 'projects'>;
 

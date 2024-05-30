@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from '../projects.service';
-import { ProjectType, QueryOptions } from '@typeorm';
-import { statusColorMap } from '../../utils';
+import { ProjectType } from '@typeorm';
+import { statusColorMap, QueryOptions } from '@utils';
 
 @Component({
   selector: 'nestjs-api-angular-mono-projects-list',
@@ -15,6 +15,7 @@ export class ProjectsListComponent implements OnInit {
   projectStatusMap: typeof statusColorMap = statusColorMap
   filter: QueryOptions<ProjectType>['filter'] = {
     // dueDate: (new Date("2025-01-01")).toISOString().substring(0, 10),
+
   };
 
   constructor(private readonly projectsService: ProjectsService,

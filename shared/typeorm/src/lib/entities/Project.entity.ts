@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { IsDateString, IsIn, IsNotEmpty } from 'class-validator';
 import { User } from './User.entity';
-import { PROJECT_STATUS, STATUSES } from '../enums/Project.enum';
+import { PROJECT_STATUS, STATUSES } from '@utils';
 import { IsUnique } from '../IsUniqueValidator';
 
 @Entity({ name: 'projects' })
