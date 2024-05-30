@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   CreateProjectType,
+  CustomTypedForm,
   ErrorResponse,
   ProjectIdType,
   ProjectType,
 } from '@typeorm';
-import { FormControlWrapper } from '../../utils';
 import { ProjectsService } from '../projects.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { updatedDiff } from 'deep-object-diff';
 
-type CreateProjectForm = FormControlWrapper<CreateProjectType>;
+type ProjectForm = CustomTypedForm<CreateProjectType>;
 
 const STATUSES = {
   TO_DO: 'To Do',
@@ -29,7 +29,7 @@ const STATUSES = {
 })
 export class ProjectFormComponent implements OnInit {
 
-  projectForm: FormGroup<CreateProjectForm> = new FormGroup<CreateProjectForm>({
+  projectForm = new FormGroup<ProjectForm>({
     name: new FormControl('', { nonNullable: true }),
     description: new FormControl('', { nonNullable: true }),
     status: new FormControl(STATUSES.TO_DO, {

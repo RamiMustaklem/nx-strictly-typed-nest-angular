@@ -1,4 +1,4 @@
-// import { PROJECT_STATUS } from './lib/enums/Project.enum';
+import { FormControl } from '@angular/forms';
 
 export type ObjectValues<T> = T[keyof T];
 
@@ -23,3 +23,6 @@ export type BgColorCombination = `${bgColor}-${colorName}-${colorWeight}`;
 export type ElementColorCombination = `${textColor | bgColor}-${colorName}-${colorWeight}`;
 
 export type Email = `${string}@${string}.${string}`;
+
+type FormControlWrapper<Rec> = { [k in keyof Rec]: FormControl<Rec[k]> };
+export type CustomTypedForm<T> = FormControlWrapper<T>;

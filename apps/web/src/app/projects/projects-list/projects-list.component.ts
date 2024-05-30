@@ -23,7 +23,6 @@ export class ProjectsListComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       const status = params['status'];
-      console.log(params);
       this.filter = { ...this.filter, status };
       // if all filter fields are undefined or null make the filters object undefined
       if (Object.values(this.filter).every((value) => !value)) {
