@@ -40,8 +40,9 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  updateUser(id: UserIdType, user: UpdateUserDto) {
-    return this.userRepository.update({ id }, { ...user, /*updatedAt: new Date()*/ });
+  async updateUser(id: UserIdType, user: UpdateUserDto) {
+    await this.userRepository.update({ id }, { ...user, /*updatedAt: new Date()*/ });
+    return await this.userRepository.findOne({ where: { id } });
   }
 
   deleteUser(id: UserIdType) {

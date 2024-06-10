@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../users.service';
 import { UserType } from '@typeorm';
+import { QueryOptions } from '@utils';
 
 @Component({
   selector: 'nestjs-api-angular-mono-users',
@@ -10,39 +12,42 @@ import { UserType } from '@typeorm';
 export class UsersListComponent implements OnInit {
 
   users: UserType[] = [];
+  filter: QueryOptions<UserType>['filter'] = {
+    // dob: (new Date("2025-01-01")).toISOString().substring(0, 10),
+  };
 
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService,
+              private readonly route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      const position = params['position'];
+      const department = params['department'];
+      this.filter = { ...this.filter, position, department };
+      // if all filter fields are undefined or null make the filters object undefined
+      if (Object.values(this.filter).every((value) => !value)) {
+        this.filter = undefined;
+      }
+      this.getUsers();
+    });
+  }
+
+  private getUsers() {
     this.usersService.getUsers({
       page: 1,
       limit: 10,
-      filter: {
-        // name: 'Rami',
-        position: 'Developer',
-        // department: 'Engineering',
-        dob: (new Date("1988-01-06")).toISOString().substring(0, 10),
-      },
       orderBy: 'desc',
       sortBy: 'dob',
-      // text: 'John'
+      // text: 'John',
+      ...(this.filter && { filter: this.filter }),
     })
       .subscribe({
         next: (users) => {
           this.users = users.items;
-          // users.items.forEach((user) => {
-          //   console.log('user', user.id, user.name, user.email)
-          // });
-          // console.log('users.meta', users.meta);
         }, error(error) {
           console.log('error', error);
         }
       });
-
-    /*this.usersService.getUserById(1)
-      .subscribe((user) => {
-        console.log('user', user)
-      })*/
   }
 
 }
