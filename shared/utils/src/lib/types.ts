@@ -19,15 +19,15 @@ const COLORS = [
   'slate',
 ] as const;
 
-type textColor = 'text';
-type bgColor = 'bg';
-export type colorName = typeof COLORS[number];
-type colorWeight = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-export type colorType = 'success' | 'danger' | 'warning' | 'info';
+type TextClassPrefix = 'text';
+type BgClassPrefix = 'bg';
+export type ColorName = typeof COLORS[number];
+type ColorWeight = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+export type ColorType = 'success' | 'danger' | 'warning' | 'info';
 
-export type TextColorCombination = `${textColor}-${colorName}-${colorWeight}`;
-export type BgColorCombination = `${bgColor}-${colorName}-${colorWeight}`;
-export type ElementColorCombination = `${textColor | bgColor}-${colorName}-${colorWeight}`;
+export type TextColorCombination = `${TextClassPrefix}-${ColorName}-${ColorWeight}`;
+export type BgColorCombination = `${BgClassPrefix}-${ColorName}-${ColorWeight}`;
+export type ElementColorCombination = `${TextClassPrefix | BgClassPrefix}-${ColorName}-${ColorWeight}`;
 
 export type Email = `${string}@${string}.${string}`;
 

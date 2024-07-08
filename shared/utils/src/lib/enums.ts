@@ -1,6 +1,6 @@
-import { BgColorCombination, colorName, colorType, PROJECT_STATUS, TextColorCombination } from './types';
+import { BgColorCombination, ColorName, ColorType, PROJECT_STATUS, TextColorCombination } from './types';
 
-export const colorMap: { [key in colorType]: colorName } = {
+export const colorMap: { [key in ColorType]: ColorName } = {
   success: 'green',
   info: 'blue',
   warning: 'orange',
