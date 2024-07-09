@@ -1,18 +1,24 @@
-<h1 class="text-orange-300">User Management App</h1>
+<header>
 
-<nav>
-  <ul>
-    @for (link of navLinks; track link.url) {
-      <li>
-        <a [routerLink]="link.url"
-           [routerLinkActive]="activeNavClass"
-           (isActiveChange)="onNavChange($event, link.url)"
-           [routerLinkActiveOptions]="{exact: link.url === '/'}">{{ link.label }}</a>
-      </li>
-    } @empty {
-      No nav items available
-    }
-  </ul>
-</nav>
+  <h1 class="text-orange-300">Project Management App</h1>
 
-<router-outlet></router-outlet>
+  <nav>
+    <ul>
+      @for (link of navLinks; track link.url) {
+        <li>
+          <a [routerLink]="link.url"
+             [routerLinkActive]="activeNavClass"
+             (isActiveChange)="onNavChange($event, link.url)"
+             [routerLinkActiveOptions]="{exact: link.url === '/'}">{{ link.label }}</a>
+        </li>
+      } @empty {
+        No nav items available
+      }
+    </ul>
+  </nav>
+
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

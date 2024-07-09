@@ -34,12 +34,13 @@ export class ProjectsListComponent implements OnInit {
   }
 
   private getProjects() {
+    const filter = this.filter;
     this.projectsService.getProjects({
       page: 1,
       limit: 10,
       orderBy: 'desc',
       sortBy: 'dueDate',
-      ...(this.filter && { filter: this.filter }),
+      ...(filter && { filter }),
     })
       .subscribe({
         next: (projects) => {

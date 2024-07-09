@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TextColorCombination } from '@utils';
 
@@ -8,6 +8,7 @@ import { TextColorCombination } from '@utils';
   selector: 'nestjs-api-angular-mono-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class AppComponent {
   title = 'User Management App';

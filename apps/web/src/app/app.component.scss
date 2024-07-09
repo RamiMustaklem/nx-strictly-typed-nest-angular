@@ -1,0 +1,38 @@
+header {
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 50%;
+  margin: 0 auto;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+
+    ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-right: 20px;
+
+        a {
+          text-decoration: none;
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}

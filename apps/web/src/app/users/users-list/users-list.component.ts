@@ -33,13 +33,14 @@ export class UsersListComponent implements OnInit {
   }
 
   private getUsers() {
+    const filter = this.filter;
     this.usersService.getUsers({
       page: 1,
       limit: 10,
       orderBy: 'desc',
       sortBy: 'dob',
       // text: 'John',
-      ...(this.filter && { filter: this.filter }),
+      ...(filter && { filter }),
     })
       .subscribe({
         next: (users) => {
