@@ -2,42 +2,28 @@
 
 <hr class="separator-line">
 
-<!-- reset filters button -->
-<a *ngIf="filter" routerLink="./" [queryParams]="{}">
-  Reset Filters
-</a>
+<div class="filters">
+  <div>
+    <select name="positions" id="positions">
+      <option value="">Select Position</option>
+      <option *ngFor="let position of positions" [value]="position">{{ position }}</option>
+    </select>
 
-<table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Position</th>
-    <th>Department</th>
-    <th>DOB</th>
-    <th>Created At</th>
-  </tr>
-  </thead>
-  <tbody>
-    @for (user of users; track user.id) {
-      <tr>
-        <td>{{ user.id }}</td>
-        <td><a routerLink="/users/{{user.id}}">{{ user.name }}</a></td>
-        <td>{{ user.email }}</td>
-        <td class="position">
-          <a routerLink="./" [queryParams]="{position: user.position}">
-            {{ user.position }}
-          </a>
-        </td>
-        <td class="department">
-          <a routerLink="./" [queryParams]="{department: user.department}">
-            {{ user.department }}
-          </a>
-        </td>
-        <td>{{ user.dob | date }}</td>
-        <td>{{ user.createdAt | date }}</td>
-      </tr>
-    }
-  </tbody>
-</table>
+    <select name="departments" id="departments">
+      <option value="">Select Department</option>
+      <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+    </select>
+  </div>
+
+  <!-- reset filters button -->
+  <a *ngIf="filter" routerLink="./" [queryParams]="{}">
+    Reset Filters
+  </a>
+</div>
+
+<nestjs-api-angular-mono-data-table *ngIf="users"
+                                    [headers]="tableHeaders"
+                                    [dataItems]="users"
+                                    [baseURI]="'users'"
+                                    [clickToEdit]="'name'"
+></nestjs-api-angular-mono-data-table>

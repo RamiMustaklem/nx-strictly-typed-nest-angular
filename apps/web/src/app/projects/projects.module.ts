@@ -7,6 +7,7 @@ import { ProjectsComponent } from './projects.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectsService } from './projects.service';
+import { DataTableComponent } from '../data-table/data-table.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProjectsService } from './projects.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ProjectsRoutingModule
+    ProjectsRoutingModule,
+    DataTableComponent,
   ],
   providers: [
     ProjectsService

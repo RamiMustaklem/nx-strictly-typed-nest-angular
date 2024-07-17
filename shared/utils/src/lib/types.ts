@@ -39,3 +39,9 @@ export type OrderBy = typeof ORDER_BY[OrderByKeys];
 
 type SortByKeys = keyof typeof SORT_BY;
 export type SortBy = typeof SORT_BY[SortByKeys];
+
+export type GenericEntityWithId<T> = {
+  [key in keyof T]: T[keyof T];
+} & {
+  id: number;
+};

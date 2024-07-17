@@ -7,6 +7,7 @@ import { UsersComponent } from './users.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UsersService } from './users.service';
 import { UserFormComponent } from './user-form/user-form.component';
+import { DataTableComponent } from '../data-table/data-table.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserFormComponent } from './user-form/user-form.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTableComponent,
   ],
   providers: [
     UsersService

@@ -1,0 +1,26 @@
+<table>
+  <thead>
+  <tr>
+    @for (header of headers; track header.value) {
+      <th>{{ header.label }}</th>
+    }
+  </tr>
+  </thead>
+  <tbody>
+    @for (item of dataItems; track item.id) {
+      <tr>
+        @for (header of headers; track header.value) {
+          <td>
+            @if (clickToEdit === header.value) {
+              <a [routerLink]="'/' + baseURI + '/' + item.id">{{ item[header.value] }}</a>
+            } @else if (isFieldOfTypeDate(item[header.value]) && header.value !== 'id') {
+              {{ item[header.value] | date }}
+            } @else {
+              {{ item[header.value] }}
+            }
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
