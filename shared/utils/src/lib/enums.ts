@@ -15,6 +15,7 @@ export const statusColorMap: {
   'Done': ['text-blue-700', 'bg-green-100'],
   'Incomplete': ['text-purple-800', 'bg-red-400'],
   'Archived': ['text-slate-900', 'bg-slate-200'],
+  'DELETED': ['text-slate-500', 'bg-slate-100'],
 };
 
 export const STATUSES = {
@@ -23,6 +24,7 @@ export const STATUSES = {
   DONE: 'Done',
   INCOMPLETE: 'Incomplete',
   ARCHIVED: 'Archived',
+  DELETED: 'DELETED',
 } as const;
 
 export const POSITIONS = {
